@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifeguard Rotation Scheduler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Lifeguard Rotation Scheduler</h1>
+  </header>
+
+  <main>
+    <section id="setup">
+      <h2>Shift setup</h2>
+
+      <div class="grid">
+        <div>
+          <label for="guards">Guards (one per line)</label>
+          <textarea id="guards" rows="6">Alison
+Rose
+Kate
+Maya</textarea>
+        </div>
+        <div>
+          <label for="stations">Stations, in rotation order (one per line)</label>
+          <textarea id="stations" rows="6">Deep End
+Shallow End
+Middle Area</textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="start">Shift start</label>
+          <input type="time" id="start" value="09:00">
+        </div>
+        <div>
+          <label for="end">Shift end</label>
+          <input type="time" id="end" value="13:00">
+        </div>
+        <div>
+          <label for="interval">Rotate every (minutes)</label>
+          <input type="number" id="interval" min="5" step="5" value="20">
+        </div>
+      </div>
+
+      <button id="build">Build rotation</button>
+      <button id="print">Print</button>
+
+      <p id="error" role="alert"></p>
+    </section>
+
+    <section>
+      <h2>Rotation</h2>
+      <div id="output"></div>
+    </section>
+  </main>
+
+  <!-- rotation.js must load before app.js, because app.js uses its function -->
+  <script src="rotation.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
