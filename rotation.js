@@ -22,3 +22,46 @@ function formatTime(minutes) {
   return `${hours}:${mins} ${period}`;
 
 }
+
+function buildSchedule(guards, stations, start, end, interval) {
+    if (stations.length === 0) {
+        throw new Error("No stations provided");
+    }
+    if (guards.length < stations.length) {
+        throw new Error("Not enough guards for the number of stations");
+    }
+    if (!(interval > 0)) {
+        throw new Error("Interval rotation must be a positive number");
+    }
+
+    const startMinutes = toMinutes(start);
+    let endMinutes = toMinutes(end);
+    if (endMinutes <= startMinutes) {
+        endMinutes += 24 * 60; // Handle overnight shifts past midnight
+    }
+
+    const breaks = guards.length - stations.length;
+    const positions=[...stations];
+    for (let i = 1; i <= breaks; i++) {
+        if (breaks === 1) {
+            positions.push("Break");
+        } else {
+            positions.push("Break " + i);
+        }
+
+        
+}
+    const rows = [];
+    let round = 0;
+    for (let t = startMin; t < endMin; t += interval) {
+        const assignments = {};
+        for (let g = 0; g < guards.length; g++) {
+        const pos = (g + round) % positions.length;
+        assignments[positions[pos]] = guards[g];
+        }
+        rows.push({ time: formatTime(t), assignments });
+        round++;
+    }
+    return { positions, rows };
+
+}
