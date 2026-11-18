@@ -56,10 +56,10 @@ function buildSchedule(guards, stations, start, end, interval) {
     for (let t = startMin; t < endMin; t += interval) {
         const assignments = {};
         for (let g = 0; g < guards.length; g++) {
-        const pos = (g + round) % positions.length;
-        assignments[positions[pos]] = guards[g];
-        }
-        rows.push({ time: formatTime(t), assignments });
+            const pos = (g + round) % positions.length;
+            assignments[positions[pos]] = guards[g];
+            }
+            rows.push({ time: formatTime(t), assignments });
         round++;
     }
     return { positions, rows };
