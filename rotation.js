@@ -53,7 +53,7 @@ function buildSchedule(guards, stations, start, end, interval) {
 }
     const rows = [];
     let round = 0;
-    for (let t = startMin; t < endMin; t += interval) {
+    for (let t = startMinutes; t < endMinutes; t += interval) {
         const assignments = {};
         for (let g = 0; g < guards.length; g++) {
             const pos = (g + round) % positions.length;
